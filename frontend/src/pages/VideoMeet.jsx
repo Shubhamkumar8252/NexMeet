@@ -101,7 +101,7 @@ export default function VideoMeetComponent() {
       }
 
       if(videoAvailable || audioAvailable) {
-         const userMediaStream = await navigator.mediaDevices({video: videoAvailable, audio: audioAvailable});
+         const userMediaStream = await navigator.mediaDevices.getUserMedia({video: videoAvailable, audio: audioAvailable});
 
         if(userMediaStream) {
           window.localStream = userMediaStream;
@@ -140,9 +140,10 @@ export default function VideoMeetComponent() {
       connections[id].addStream(window.localStream)
 
       connections[id].createOffer().then((description) => {
+        console.log(description)
         connections[id].setLocalDescription(description)
         .then(() => {
-          socketIdRef.current.emit("signal", id, JSON.stringify({ "sdp": connections[id].localDescription}))
+          socketRef.current.emit("signal", id, JSON.stringify({ 'sdp': connections[id].localDescription}))
         })
         .catch(e => console.log(e))
       })
