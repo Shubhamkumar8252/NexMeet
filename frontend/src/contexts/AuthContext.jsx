@@ -1,41 +1,19 @@
-// import React, { createContext } from 'react';
-// export const AuthContext = createContext();
-// export const AuthProvider = ({ children }) => {
-//   const handleLogin = async (username, password) => {
-//     // Replace with real login logic
-//     console.log("Logging in:", username, password);
-//     return "Login successful";
-//   };
-//   const handleRegister = async (name, username, password) => {
-//     // Replace with real registration logic
-//     console.log("Registering:", name, username, password);
-//     return "Registration successful";
-//   };
-//   return (
-//     <AuthContext.Provider value={{ handleLogin, handleRegister }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
 import axios from "axios";
 import httpStatus from "http-status";
-import { StatusCodes } from 'http-status-codes';
-
-import { Children, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import server from "../environment.";
 
 
 export const AuthContext = createContext({});
 
 const client = axios.create({
-    baseURL: "http://localhost:8000/api/v1/users"
+    baseURL: `${server.prod}/api/v1/users`
 })
 
 
 
-export const AuthProvider = ({Children}) => {
+export const AuthProvider = ({children}) => {
 
     const authContext = useContext(AuthContext);
 
@@ -107,7 +85,7 @@ export const AuthProvider = ({Children}) => {
     }
         return (
             <AuthContext.Provider value={data}>
-                 {Children}
+                 {children}
             </AuthContext.Provider>
         )
 }
