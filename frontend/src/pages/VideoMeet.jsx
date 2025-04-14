@@ -12,6 +12,7 @@ import MicOffIcon from '@mui/icons-material/MicOff';
 import ScreenShareIcon from '@mui/icons-material/ScreenShare'
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat';
+import server from '../environment'
 
 import "../styles/videoComponent.module.css";
 import { useNavigate } from 'react-router-dom';
