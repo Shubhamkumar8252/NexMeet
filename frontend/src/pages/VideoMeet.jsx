@@ -317,7 +317,7 @@ export default function VideoMeetComponent() {
 
 
             if(window.localStream !== undefined && window.localStream !== null) {
-              connections[socketListId].addStream(window.localStorage);
+              connections[socketListId].addStream(window.localStream);
             } else {
               // TODO BLACKSILENCE iska mtlb screen off hai to black screen dikhata hai
               // Let blackslience
