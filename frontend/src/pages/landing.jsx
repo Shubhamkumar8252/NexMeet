@@ -3,7 +3,6 @@ import "../App.css"
 import { Link, useNavigate } from 'react-router-dom'
 export default function LandingPage() {
 
-
     const router = useNavigate();
 
     return (
@@ -42,12 +41,8 @@ export default function LandingPage() {
                 <div>
 
                     <img src="/mobile.png" alt="" />
-
                 </div>
             </div>
-
-
-
         </div>
     )
 }

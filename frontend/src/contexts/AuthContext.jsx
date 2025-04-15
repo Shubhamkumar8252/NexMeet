@@ -45,8 +45,12 @@ export const AuthProvider = ({children}) => {
                 password: password
             });
 
+            console.log(username, password)
+            console.log(request.data)
+
             if(request.status === httpStatus.OK) {
                 localStorage.setItem("token", request.data.token);
+                Router("/home                                                                                                                                                                                                                                               ")
             }
             } catch (err) {
                 throw err;
@@ -69,7 +73,7 @@ export const AuthProvider = ({children}) => {
     
     const addToUserHistory = async (meetingCode) => {
         try{
-            let request = await client.get("/add_to_activity", {
+            let request = await client.post("/add_to_activity", {
                     token: localStorage.getItem("token"),
                     meeting_code: meetingCode
             });
