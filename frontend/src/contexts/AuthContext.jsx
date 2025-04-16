@@ -21,6 +21,7 @@ export const AuthProvider = ({children}) => {
     const [userData, setUserData] = useState(authContext);
 
 
+    const router = useNavigate();
 
     const handleRegister = async(name, username, password) => {
         try{
@@ -50,12 +51,12 @@ export const AuthProvider = ({children}) => {
 
             if(request.status === httpStatus.OK) {
                 localStorage.setItem("token", request.data.token);
-                router("/home")                                                                                                                                                                                                                                               ")
+                router('/home');                                                                                                                                                                                          
             }
             } catch (err) {
                 throw err;
             }
-        }
+    };
 
     const getHistoryOfUser = async () => {
         try{
@@ -93,3 +94,4 @@ export const AuthProvider = ({children}) => {
             </AuthContext.Provider>
         )
 }
+

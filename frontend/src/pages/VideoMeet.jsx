@@ -45,7 +45,7 @@ export default function VideoMeetComponent() {
 
   let[screen, setScreen] = useState();
 
-  let[showModel, setModel] = useState(true);
+  let[showModal, setModal] = useState(true);
 
   let[screenAvailable, setScreenAvailable] = useState();
 
@@ -473,6 +473,8 @@ export default function VideoMeetComponent() {
               <div className={styles.chattingDisplay}>
 
                 {message.length > 0 ? message.map((item, index) => {
+                  console.log(message)
+
                   return (
                     <div style = {{ marginBottom: "200px" }}key={index}>
                       <p style = {{ fontWeight: "bold" }}>{item.sender}</p>
@@ -494,7 +496,7 @@ export default function VideoMeetComponent() {
 
             <div className={styles.buttonContainers}>
               <IconButton onClick={handleVideo} style={{color: "white"}}>
-                {(video === true) ? <videocamIcon /> : <videocamOffIcon /> }
+                {(video === true) ? <VideocamIcon /> : <VideocamOffIcon /> }
               </IconButton>
               <IconButton onClick={handleEndCall} style={{color: "red"}}>
                     <callEndIcon/>
@@ -509,7 +511,7 @@ export default function VideoMeetComponent() {
               </IconButton> : <></>}
 
               <Badge badgeContent={newMessages} max={999} color='secondary'>
-                <IconButton onClick={() => setModel(!showModel)} style={{color: "white" }}> 
+                <IconButton onClick={() => setModal(!showModal)} style={{color: "white" }}> 
                   <ChatIcon /> </IconButton>
               </Badge>
 
