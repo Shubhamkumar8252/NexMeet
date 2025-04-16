@@ -66,13 +66,6 @@ export default function VideoMeetComponent() {
 
 
 
-
-
-
-
-
-
-
     const getPermissions = async () => {
       try {
         const videoPermission = await navigator.mediaDevices.getUserMedia({video: true});
@@ -496,7 +489,7 @@ export default function VideoMeetComponent() {
 
             <div className={styles.buttonContainers}>
               <IconButton onClick={handleVideo} style={{color: "white"}}>
-                {(video === true) ? <VideocamIcon /> : <VideocamOffIcon /> }
+                {(video === true) ? <VideocamIcon /> : <videocamOffIcon /> }
               </IconButton>
               <IconButton onClick={handleEndCall} style={{color: "red"}}>
                     <callEndIcon/>
