@@ -31,7 +31,8 @@ export default function Authentication() {
             if (formState === 0) {
                 let result = await handleLogin(username, password);
                 
-            } else if (formState === 1) {
+            } 
+            if (formState === 1) {
                 let result = await handleRegister(name, username, password);
                 console.log(result);
                 setUsername("");
@@ -81,28 +82,28 @@ export default function Authentication() {
                         </Avatar>
 
                         <div>
-                            <Button variant={formState === 0 ? "contained" : ""} onClick={() => setFormState(0)}>
+                            <Button variant={formState === 0 ? "contained" : ""} onClick={() => { setFormState(0)}}>
                                 Sign In
                             </Button>
-                            <Button variant={formState === 1 ? "contained" : ""} onClick={() => setFormState(1)}>
+                            <Button variant={formState === 1 ? "contained" : ""} onClick={() => { setFormState(1) }}>
                                 Sign Up
                             </Button>
                         </div>
 
                         <Box component="form" noValidate sx={{ mt: 1 }}>
-                            {formState === 1 && (
+                            {formState === 1 ?
                                 <TextField
                                     margin="normal"
                                     required
                                     fullWidth
-                                    id="fullname"
+                                    id="username"
                                     label="Full Name"
-                                    name="fullname"
+                                    name="username"
                                     value={name}
                                     autoFocus
                                     onChange={(e) => setName(e.target.value)}
                                 />
-                            )}
+                                : <></>}
 
                             <TextField
                                 margin="normal"
@@ -112,6 +113,7 @@ export default function Authentication() {
                                 label="Username"
                                 name="username"
                                 value={username}
+                                autoFocus
                                 onChange={(e) => setUsername(e.target.value)}
                             />
                             <TextField
