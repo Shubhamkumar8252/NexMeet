@@ -234,9 +234,9 @@ export default function VideoMeetComponent() {
     }
 
     //TODO addMesage
-    let addMessage = (data, sender, socketIdSender) => {
+    const addMessage = (data, sender, socketIdSender) => {
 
-      setMessage((prevMessages) => [
+      setMessages((prevMessages) => [
         ...prevMessages,
         {sender: sender, data: data}
       ]);
@@ -244,8 +244,7 @@ export default function VideoMeetComponent() {
       if(socketIdSender !== socketIdRef.current) {
         setNewMessages((prevMessages) => prevMessages + 1)
       }
-
-    }
+    };
 
     let connectToSocketServer = () => {
       socketRef.current = io.connect(server_url, { secure: false })
@@ -271,7 +270,7 @@ export default function VideoMeetComponent() {
 
             connections[socketListId] = new RTCPeerConnection(peerConfigConnections)
 
-            connections[socketListId].onicecandidate = (event) => {
+            connections[socketListId].onicecandidate = function (event) {
               if(event.candidate != null) {
                 socketRef.current.emit("signal", socketListId, JSON.stringify({ 'ice': event.candidate }))
               }
@@ -288,7 +287,7 @@ export default function VideoMeetComponent() {
                   );
                   videoRef.current = updateVideos
                   return updateVideos;
-                  })
+                  });
               } else{
                 let newVideo = {
                   socketId: socketListId,
@@ -302,8 +301,6 @@ export default function VideoMeetComponent() {
                   videoRef.current = updatedVideos;
                   return updatedVideos;
                 });
-
-
               }
             };
 
@@ -319,8 +316,6 @@ export default function VideoMeetComponent() {
               window.localStream = blackSlience();
               connections[socketListId].addStream(window.localStream);
             }
-
-
           })
 
           if ( id === socketIdRef.current) {
@@ -424,10 +419,11 @@ export default function VideoMeetComponent() {
   }, [screen])
 
   let handleScreen = () => {
-    setScreen(!screen)
+    setScreen(!screen);
   }
 
   let sendMessage = () => {
+    console.log(socketRef.current);
     socketRef.current.emit("chat-message", message, username);
     setMessage("");
   }
@@ -439,6 +435,18 @@ export default function VideoMeetComponent() {
     } catch(e) { }
     routeTo("/home")
   } 
+
+  let openChat = () => {
+    setModal(true);
+    setNewMessages(0);
+    }
+    let closeChat = () => {
+      setModal(false);
+    }
+    let handleMessage = (e) => {
+      setMessage(e.target.value);
+  }
+
   return (
      <div>
 
